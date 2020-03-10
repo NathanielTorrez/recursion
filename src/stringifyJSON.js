@@ -20,7 +20,7 @@ var stringifyJSON = function(obj) {
   } else if (typeof obj === "null") {
   	return "null"
   } else if ( typeof obj === "undefined") {
-  	return "undefined"{
+  	return "undefined"
   } else if (typeof obj === 'string') {
   	return obj;
   }
@@ -42,13 +42,12 @@ for ( let keys in obj) {
 	if (typeof obj[keys] === 'undefined') {
 		count -= 1
 	} else if (count > 1) {
-		string += stringifyJSON(keys) 
+		string += stringifyJSON(keys) + ':' + stringifyJSON(obj[keys]) +', '
+		count -= 1
+	} else {
+		string += stringifyJSON(keys) + ':' + stringifyJSON(obj[keys])
 	}
 }
-
- 	// maybe use a for loop or a function to iterate over the contents
-
- 	
-
+ return '{' + string + '}'	
 
 };
