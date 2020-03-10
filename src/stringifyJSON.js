@@ -26,24 +26,24 @@ var stringifyJSON = function(obj) {
   }
 
   // create circumstances for is it  an object and if it is an array like object
-
-  if (typeof obj === 'object' and Array.isArray(obj) === false) {
-   let opener = '{';
-   let closer = '}'
-  } else if (Array.isArray) {
-  	let opener = '['
-  	let closer = ']'
+	 if (Array.isArray(obj)) {
+	 	return '[' + obj.map(function(value){
+	 		return stringifyJSON(value)
+	 	}) + ']'
+  
   }
 
   
   // find out of the object has any elements in it to know when to end
 
 
- if (checkIfEmpty(obj)) {
- 	return opener + closer ;
- }
-// maybe use a for loop or a function to iterate over the contents
+ // if (checkIfEmpty(obj)) {
+ // 	return opener + closer ;
+ // }
 
+ 	// maybe use a for loop or a function to iterate over the contents
+
+ 	
 
 
 };
