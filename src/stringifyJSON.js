@@ -5,49 +5,46 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
-  // helper function to check if object is empty, should evaluate to a boolean
-
-  let checkIfEmpty = function (obj) {
- 	return Object.keys(obj).length === 0
- }
-
-
   // solve for the one answer cases
-  let string = "";
+  var resultStr = "";
 
-  if (typeof obj === "boolean" || typeof obj === "number") {
-  	return string += obj 
-  } else if (typeof obj === "null") {
-  	return "null"
-  } else if ( typeof obj === "undefined") {
-  	return "undefined"
+  if (typeof obj === "boolean" || typeof obj === "number" ||  obj === null) {
+  	return resultStr += obj;
+  } else if ( typeof obj === 'function') {
+  	return null 
+  } else if ( typeof obj === "undefined"){
+  	return 'undefined'
   } else if (typeof obj === 'string') {
-  	return obj;
+  	return '"' + obj + '"';
   }
 
   // create circumstances for is it  an object and if it is an array like object
 	 if (Array.isArray(obj)) {
+	// map goes over and runs each element into our one answer cases
+
 	 	return '[' + obj.map(function(value) {
 	 	
 	 		return stringifyJSON(value)
 	 	
 	 	}) + ']' ;
-  
   }
 
-  
-let count = Object.keys(obj).length;
+  // the only option left is for it to be an obj
 
-for ( let keys in obj) {
-	if (typeof obj[keys] === 'undefined') {
+  // create a count to apply correct extras to the string
+var countKeys = Object.keys(obj);
+var count = countKeys.length
+
+for ( var key in obj) {
+	if (typeof obj[key] === 'undefined' || typeof obj[key] === 'function') {
 		count -= 1
 	} else if (count > 1) {
-		string += stringifyJSON(keys) + ':' + stringifyJSON(obj[keys]) +', '
+		resultStr += stringifyJSON(key) + ':' + stringifyJSON(obj[key]) +',';
 		count -= 1
 	} else {
-		string += stringifyJSON(keys) + ':' + stringifyJSON(obj[keys])
+		resultStr += stringifyJSON(key) + ':' + stringifyJSON(obj[key])
 	}
 }
- return '{' + string + '}'	
+ return '{' + resultStr + '}'	
 
 };
