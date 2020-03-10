@@ -27,19 +27,24 @@ var stringifyJSON = function(obj) {
 
   // create circumstances for is it  an object and if it is an array like object
 	 if (Array.isArray(obj)) {
-	 	return '[' + obj.map(function(value){
+	 	return '[' + obj.map(function(value) {
+	 	
 	 		return stringifyJSON(value)
-	 	}) + ']'
+	 	
+	 	}) + ']' ;
   
   }
 
   
-  // find out of the object has any elements in it to know when to end
+let count = Object.keys(obj).length;
 
-
- // if (checkIfEmpty(obj)) {
- // 	return opener + closer ;
- // }
+for ( let keys in obj) {
+	if (typeof obj[keys] === 'undefined') {
+		count -= 1
+	} else if (count > 1) {
+		string += stringifyJSON(keys) 
+	}
+}
 
  	// maybe use a for loop or a function to iterate over the contents
 
