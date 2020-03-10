@@ -5,10 +5,15 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
+  // helper function to check if object is empty, should evaluate to a boolean
+
+  let checkIfEmpty = function (obj) {
+ 	return Object.keys(obj).length === 0
+ }
 
 
   // solve for the one answer cases
-  var string = "";
+  let string = "";
 
   if (typeof obj === "boolean" || typeof obj === "number") {
   	return string += obj 
@@ -23,14 +28,20 @@ var stringifyJSON = function(obj) {
   // create circumstances for is it  an object and if it is an array like object
 
   if (typeof obj === 'object' and Array.isArray(obj) === false) {
-   var opener = '{';
-   var closer = '}'
+   let opener = '{';
+   let closer = '}'
   } else if (Array.isArray) {
-  	var opener = '['
-  	var closer = ']'
+  	let opener = '['
+  	let closer = ']'
   }
 
-// find out of the object has any elements in it to know when to end
+  
+  // find out of the object has any elements in it to know when to end
+
+
+ if (checkIfEmpty(obj)) {
+ 	return opener + closer ;
+ }
 // maybe use a for loop or a function to iterate over the contents
 
 
